@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import { UsernameForm } from './components/UsernameForm'
+import { UsernameForm } from './pages/UsernameForm'
 import { Ranking } from './components/Ranking'
+import { Game } from './pages/Game'
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<UsernameForm />} />
         <Route path='/ranking' element={<Ranking />} />
-        <Route path='/game' element={<div>Game</div>} />
+        <Route path='/game' element={<Game />} />
       </Routes>
     </main>
   )
