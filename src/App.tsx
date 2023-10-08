@@ -1,11 +1,11 @@
 import './App.css'
-import { Board } from './components/Board'
+import { UsernameForm } from './components/UsernameForm'
 
 function App() {
   return (
     <main className='board'>
       <h1>Tres en raya</h1>
-      <Board />
+      <UsernameForm />
     </main>
   )
 }
