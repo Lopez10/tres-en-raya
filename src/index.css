@@ -29,6 +29,12 @@ body {
   box-sizing: border-box;
 }
 
+.title {
+  text-align: center;
+  font-size: 60px;
+  padding-bottom: 80px;
+}
+
 .board {
   width: fit-content;
   margin: 40px auto;
@@ -42,7 +48,6 @@ body {
 
 .board button {
   padding: 8px 12px;
-  margin: 25px;
   background: transparent;
   border: 2px solid #eee;
   color: #eee;

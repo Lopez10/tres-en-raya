@@ -7,7 +7,7 @@ import { Game } from './pages/Game'
 function App() {
   return (
     <main className='board'>
-      <h1>Tres en raya</h1>
+      <h1 className='title'>Tres en raya</h1>
       <Routes>
         <Route path='/' element={<UsernameForm />} />
         <Route path='/ranking' element={<Ranking />} />
