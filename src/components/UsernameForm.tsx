@@ -23,14 +23,16 @@ export const UsernameForm = () => {
                 display: 'flex',
                 justifyContent: 'center',
             }}>
-                <button style={{
-                    fontSize: '1rem',
-                }}>Empezar</button>
                 <button
                     style={{
                         fontSize: '1rem',
-                    }}
-                >
+                    }}>
+                    Empezar
+                </button>
+                <button
+                    style={{
+                        fontSize: '1rem',
+                    }}>
                     Ranking
                 </button>
             </div>
