@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { setPlayer, setUsername } from '../store/features/playerSlice'
-import { RootState } from "../app/store"
+import { RootState } from "../store/store"
 
 export const UsernameForm = () => {
     const username = useSelector((state: RootState) => state.player.username)
@@ -32,7 +32,6 @@ export const UsernameForm = () => {
             }}
                 value={username}
                 onChange={(e) => dispatch(setUsername({ username: e.target.value }))}
-                onBlur={createOrAccessPlayer}
             />
             <div style={{
                 display: 'flex',
@@ -42,14 +41,18 @@ export const UsernameForm = () => {
                     style={{
                         fontSize: '1rem',
                     }}
-                    onClick={() => createOrAccessPlayer()}
+                    disabled={username === ''}
+                    onClick={createOrAccessPlayer}
                 >
                     Empezar
                 </button>
                 <button
                     style={{
                         fontSize: '1rem',
-                    }}>
+                    }}
+                    disabled={username === ''}
+                    onClick={createOrAccessPlayer}
+                >
                     Ranking
                 </button>
             </div>
