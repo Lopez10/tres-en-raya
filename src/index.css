@@ -58,6 +58,12 @@ body {
   color: #222;
 }
 
+.board button:disabled {
+  cursor: default;
+  background: gray;
+  color: #eee;
+}
+
 .board .game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
