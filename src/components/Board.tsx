@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Square } from "./square"
+import { Square } from "./Square"
 
 export const Board = () => {
     const [board, setBoard] = useState<string[]>(Array(9).fill(null))
