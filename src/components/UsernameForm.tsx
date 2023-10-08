@@ -1,8 +1,20 @@
+import axios from "axios"
 import { useState } from "react"
 
 export const UsernameForm = () => {
 
     const [username, setUsername] = useState<string>('')
+
+    const createOrAccessPlayer = async () => {
+        await axios.post('http://localhost:3000/players', {
+            username: username
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+
 
     return (
         <div style={{
@@ -26,7 +38,9 @@ export const UsernameForm = () => {
                 <button
                     style={{
                         fontSize: '1rem',
-                    }}>
+                    }}
+                    onClick={() => createOrAccessPlayer()}
+                >
                     Empezar
                 </button>
                 <button
