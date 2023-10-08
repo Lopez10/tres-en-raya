@@ -2,12 +2,18 @@ import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { setPlayer, setUsername } from '../store/features/playerSlice'
 import { RootState } from "../store/store"
+import { useNavigate } from "react-router-dom"
 
 export const UsernameForm = () => {
     const username = useSelector((state: RootState) => state.player.username)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const createOrAccessPlayer = async () => {
+    const createOrAccessPlayer = async ({
+        route
+    }: {
+        route: string
+    }) => {
         const { data } = await axios.post('http://localhost:3000/players', {
             username
         }, {
@@ -16,6 +22,8 @@ export const UsernameForm = () => {
             }
         })
         dispatch(setPlayer({ player: data }))
+
+        navigate(route)
     }
 
     return (
@@ -42,7 +50,7 @@ export const UsernameForm = () => {
                         fontSize: '1rem',
                     }}
                     disabled={username === ''}
-                    onClick={createOrAccessPlayer}
+                    onClick={() => createOrAccessPlayer({ route: '/game' })}
                 >
                     Empezar
                 </button>
@@ -51,7 +59,7 @@ export const UsernameForm = () => {
                         fontSize: '1rem',
                     }}
                     disabled={username === ''}
-                    onClick={createOrAccessPlayer}
+                    onClick={() => createOrAccessPlayer({ route: '/ranking' })}
                 >
                     Ranking
                 </button>
