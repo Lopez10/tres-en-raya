@@ -1,20 +1,22 @@
 import axios from "axios"
-import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setPlayer, setUsername } from '../store/features/playerSlice'
+import { RootState } from "../app/store"
 
 export const UsernameForm = () => {
-
-    const [username, setUsername] = useState<string>('')
+    const username = useSelector((state: RootState) => state.player.username)
+    const dispatch = useDispatch()
 
     const createOrAccessPlayer = async () => {
-        await axios.post('http://localhost:3000/players', {
-            username: username
+        const { data } = await axios.post('http://localhost:3000/players', {
+            username
         }, {
             headers: {
                 'Content-Type': 'application/json'
             }
         })
+        dispatch(setPlayer({ player: data }))
     }
-
 
     return (
         <div style={{
@@ -29,7 +31,8 @@ export const UsernameForm = () => {
                 borderRadius: '8px'
             }}
                 value={username}
-                onChange={(event) => setUsername(event.target.value)}
+                onChange={(e) => dispatch(setUsername({ username: e.target.value }))}
+                onBlur={createOrAccessPlayer}
             />
             <div style={{
                 display: 'flex',
