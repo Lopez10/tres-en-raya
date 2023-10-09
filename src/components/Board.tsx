@@ -6,40 +6,44 @@ import { useEffect, useState } from "react"
 import { Game } from "../interfaces/Game"
 
 export const Board = () => {
-    const game = useSelector((state: RootState) => state.game)
+    const { id, board, turn, status, playerId } = useSelector((state: RootState) => state.game)
 
-    const [boardLocal, setBoardLocal] = useState(game.board)
-    const [turnLocal, setTurnLocal] = useState(game.turn)
-    const [status, setStatus] = useState(game.status)
+    const [boardLocal, setBoardLocal] = useState(board)
+    const [turnLocal, setTurnLocal] = useState(turn)
+    const [statusLocal, setStatusLocal] = useState(status)
 
     useEffect(() => {
-        if (game.id !== '' && turnLocal === game.playerId) {
-            updateMove()
+        if (id !== '' && turnLocal === playerId) {
+            updateMove(boardLocal)
         }
     }, [boardLocal]);
 
     const updateLocalBoard = (index: number) => {
-        setTurnLocal(game.playerId)
         const newBoard = [...boardLocal]
         newBoard[index] = 'X'
+        setTurnLocal(playerId)
         setBoardLocal(newBoard)
     }
 
-    const updateMove = async () => {
+    const updateMove = async (board: string[]) => {
         const { data: moveIA } = await axios.post('http://localhost:3000/games/move', {
-            id: game.id,
-            board: boardLocal,
-            status: game.status,
-            turn: game.turn,
-            playerId: game.playerId
+            id,
+            board,
+            status,
+            turn,
+            playerId
         }, {
             headers: {
                 'Content-Type': 'application/json'
             }
         })
+        IAResponse(moveIA)
+    }
+
+    const IAResponse = async (moveIA: Game) => {
         setTurnLocal('IA')
         setBoardLocal(moveIA.board)
-        setStatus(moveIA.status)
+        setStatusLocal(moveIA.status)
     }
     return (
         <section className='game'>
@@ -49,7 +53,7 @@ export const Board = () => {
                         key={index}
                         index={index}
                         updateBoard={updateLocalBoard}
-                        disabled={status === 'FINISHED'}
+                        disabled={statusLocal === 'FINISHED'}
                     >
                         {boardLocal[index]}
                     </Square>
