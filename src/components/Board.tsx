@@ -4,19 +4,22 @@ import { useSelector } from "react-redux"
 import { RootState } from "../store/store"
 import { useEffect, useState } from "react"
 import { Game } from "../interfaces/Game"
+import { Result } from "./Result"
 
 export const Board = () => {
-    const { id, board, turn, status, playerId } = useSelector((state: RootState) => state.game)
+    const { id, board, turn, status, playerId, winner } = useSelector((state: RootState) => state.game)
 
     const [boardLocal, setBoardLocal] = useState(board)
     const [turnLocal, setTurnLocal] = useState(turn)
     const [statusLocal, setStatusLocal] = useState(status)
+    const [winnerLocal, setWinnerLocal] = useState(winner)
 
     useEffect(() => {
         if (id !== '' && turnLocal === playerId) {
             updateMove(boardLocal)
         }
     }, [boardLocal]);
+
 
     const updateLocalBoard = (index: number) => {
         const newBoard = [...boardLocal]
@@ -31,7 +34,8 @@ export const Board = () => {
             board,
             status,
             turn,
-            playerId
+            playerId,
+            winner
         }, {
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +48,19 @@ export const Board = () => {
         setTurnLocal('IA')
         setBoardLocal(moveIA.board)
         setStatusLocal(moveIA.status)
+        setWinnerLocal(moveIA.winner)
     }
+
+    const determineResult = () => {
+        const resultMappings = {
+            [playerId]: 'Ganaste',
+            'IA': 'Perdiste',
+            null: 'Empate'
+        };
+
+        return resultMappings[winnerLocal];
+    }
+
     return (
         <section className='game'>
             {
@@ -53,12 +69,15 @@ export const Board = () => {
                         key={index}
                         index={index}
                         updateBoard={updateLocalBoard}
-                        disabled={statusLocal === 'FINISHED'}
+                        disabled={statusLocal === 'FINISHED' || boardLocal[index] !== ''}
                     >
                         {boardLocal[index]}
                     </Square>
                 ))
+            }{
+                statusLocal === 'FINISHED' && <Result text={determineResult()} />
             }
         </section>
     )
 }
+

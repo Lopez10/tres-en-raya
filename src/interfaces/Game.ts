@@ -4,4 +4,5 @@ export interface Game {
     turn: string;
     board: string[];
     playerId: string;
+    winner: string;
 }

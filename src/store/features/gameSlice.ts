@@ -1,14 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Game } from "../../interfaces/Game";
 
-
-
 const initialState: Game = {
     id: '',
     status: '',
     turn: '',
     board: ['','','','','','','','',''],
     playerId: '',
+    winner: '',
 }
 
 export const gameSlice = createSlice({
@@ -16,7 +15,7 @@ export const gameSlice = createSlice({
     initialState,
     reducers: {
         setGame: (state, action: PayloadAction<{game: Game}>) => {
-            const { id, status, turn, board, playerId } = action.payload.game;
+            const { id, status, turn, board, playerId, winner } = action.payload.game;
             return {
                 ...state,
                 id,
@@ -24,6 +23,7 @@ export const gameSlice = createSlice({
                 turn,
                 board,
                 playerId,
+                winner
             }
         },
 
