@@ -31,8 +31,15 @@ export const gameSlice = createSlice({
                 playerId,
             }
         },
+
+        setBoard: (state, action) => {
+            return {
+                ...state,
+                board: action.payload.board,
+            }
+        }
     },
 });
 
-export const { setGame } = gameSlice.actions;
+export const { setGame, setBoard } = gameSlice.actions;
 export default gameSlice.reducer;
