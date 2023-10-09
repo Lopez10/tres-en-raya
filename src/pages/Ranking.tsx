@@ -17,12 +17,13 @@ export const Ranking = () => {
         <div style={{
             display: 'flex',
             flexDirection: 'column',
+            alignItems: 'center',
             gap: '40px',
         }}>
-            <h1>Ranking</h1>
+            <h2>Ranking</h2>
             <div style={{
                 display: 'flex',
-                gap: '40px',
+                gap: '50px',
                 flexWrap: 'wrap',
                 justifyContent: 'center',
             }}>
@@ -55,6 +56,7 @@ const StatBlock = ({
         flexDirection: 'column',
         alignItems: 'center',
         gap: '16px',
+        width: '200px',
     }}>
         <h2>{title}</h2>
         <h3>{value}</h3>

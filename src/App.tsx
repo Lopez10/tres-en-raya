@@ -9,8 +9,8 @@ function App() {
   return (
     <main className='board'>
       <BackButton />
+      <h1 className='title'>Tres en raya</h1>
       <div className='content'>
-        <h1 className='title'>Tres en raya</h1>
         <Routes>
           <Route path='/' element={<UsernameForm />} />
           <Route path='/ranking' element={<Ranking />} />
