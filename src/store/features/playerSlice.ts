@@ -29,7 +29,6 @@ export const playerSlice = createSlice({
         },
 
         setPlayer: (state, action: PayloadAction<{player: Player}>) => {
-            console.log(action.payload.player)
             const { id, username, wins, losses, draws } = action.payload.player;
             return {
                 ...state,
