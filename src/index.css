@@ -17,8 +17,6 @@
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -45,7 +43,7 @@ body {
 }
 
 .board {
-  width: fit-content;
+  padding-top: 32px;
 }
 
 .board h1 {
