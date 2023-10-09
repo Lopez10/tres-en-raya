@@ -20,7 +20,7 @@ export const Ranking = () => {
             alignItems: 'center',
             gap: '40px',
         }}>
-            <h2>Ranking</h2>
+            <h1>Ranking</h1>
             <div style={{
                 display: 'flex',
                 gap: '50px',

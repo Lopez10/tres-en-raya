@@ -8,6 +8,7 @@ export const BackButton = () => {
                 fontSize: '1rem',
             }}
             onClick={() => navigate(-1)}
+            disabled={window.location.pathname === '/'}
         >
             Volver
         </button>
