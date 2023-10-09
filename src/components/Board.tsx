@@ -5,12 +5,10 @@ import { RootState } from "../store/store"
 import { useEffect, useState } from "react"
 
 export const Board = () => {
-    const board = useSelector((state: RootState) => state.game.board)
-    const turn = useSelector((state: RootState) => state.game.turn)
     const game = useSelector((state: RootState) => state.game)
 
-    const [boardLocal, setBoardLocal] = useState(board)
-    const [turnLocal, setTurnLocal] = useState(turn)
+    const [boardLocal, setBoardLocal] = useState(game.board)
+    const [turnLocal, setTurnLocal] = useState(game.turn)
     const [status, setStatus] = useState(game.status)
 
     useEffect(() => {
