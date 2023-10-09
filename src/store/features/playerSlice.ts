@@ -1,12 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-export interface Player {
-    id: string;
-    username: string;
-    wins: number;
-    losses: number;
-    draws: number;
-}
+import { Player } from "../../interfaces/Player";
 
 const initialState: Player = {
     id: '',

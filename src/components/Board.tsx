@@ -3,6 +3,7 @@ import { Square } from "./Square"
 import { useSelector } from "react-redux"
 import { RootState } from "../store/store"
 import { useEffect, useState } from "react"
+import { Game } from "../interfaces/Game"
 
 export const Board = () => {
     const game = useSelector((state: RootState) => state.game)
