@@ -1,8 +1,16 @@
-import { useState } from "react"
 import { Square } from "./Square"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../store/store"
+import { setBoard } from "../store/features/gameSlice"
 
 export const Board = () => {
-    const [board, setBoard] = useState<string[]>(Array(9).fill(null))
+    const board = useSelector((state: RootState) => state.game.board)
+    const dispatch = useDispatch()
+    const updateBoard = (index: number) => {
+        const newBoard = [...board]
+        newBoard[index] = 'X'
+        dispatch(setBoard({ board: newBoard }))
+    }
     return (
         <section className='game'>
             {
@@ -10,11 +18,7 @@ export const Board = () => {
                     <Square
                         key={index}
                         index={index}
-                        updateBoard={() => {
-                            const newBoard = [...board]
-                            newBoard[index] = 'X'
-                            setBoard(newBoard)
-                        }}>
+                        updateBoard={updateBoard}>
                         {board[index]}
                     </Square>
                 ))
