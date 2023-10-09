@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 
 export const Game = () => {
     const playerId = useSelector((state: RootState) => state.player.id)
+    const player = useSelector((state: RootState) => state.player)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -31,6 +32,12 @@ export const Game = () => {
     }, [dispatch, navigate, playerId])
     return (
         <div>
+            <h2 style={{
+                paddingBottom: '20px',
+                textAlign: 'center'
+            }}>
+                {player.username} vs IA
+            </h2>
             <Board />
         </div>
     )
