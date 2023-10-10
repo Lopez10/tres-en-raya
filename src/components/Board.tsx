@@ -18,20 +18,26 @@ export const Board = () => {
 
     useEffect(() => {
         if (id !== '' && turnLocal === playerId) {
-            updateMove(boardLocal)
+            updateMoveAndIAResponse()
         }
     }, [boardLocal]);
 
 
-    const updateLocalBoard = (index: number) => {
+    const updateLocalBoardWithPlayerMove = (index: number) => {
         const newBoard = [...boardLocal]
         newBoard[index] = 'X'
         setTurnLocal(playerId)
         setBoardLocal(newBoard)
     }
 
+    const updateMoveAndIAResponse = async () => {
+        const { data: IAMovement } = await updateMove(boardLocal)
+        setTurnLocal(PLAYER2)
+        updateGameData(IAMovement)
+    }
+
     const updateMove = async (board: string[]) => {
-        const { data: moveIA } = await axios.post('http://localhost:3000/games/move', {
+        return await axios.post('http://localhost:3000/games/move', {
             id,
             board,
             status,
@@ -43,15 +49,14 @@ export const Board = () => {
                 'Content-Type': 'application/json'
             }
         })
-        IAResponse(moveIA)
     }
 
-    const IAResponse = async (moveIA: Game) => {
-        setTurnLocal('IA')
-        setBoardLocal(moveIA.board)
-        setStatusLocal(moveIA.status)
-        setWinnerLocal(moveIA.winner)
+    const updateGameData = async (updatedGameData: Game) => {
+        setBoardLocal(updatedGameData.board)
+        setStatusLocal(updatedGameData.status)
+        setWinnerLocal(updatedGameData.winner)
     }
+
 
     const determineResult = () => {
         if (winnerLocal === playerId) return 'Ganaste';
@@ -66,7 +71,7 @@ export const Board = () => {
                     <Square
                         key={index}
                         index={index}
-                        updateBoard={updateLocalBoard}
+                        updateBoard={updateLocalBoardWithPlayerMove}
                         disabled={statusLocal === 'FINISHED' || boardLocal[index] !== ''}
                     >
                         {boardLocal[index]}
