@@ -3,7 +3,7 @@ import { Square } from "./Square"
 import { useSelector } from "react-redux"
 import { RootState } from "../store/store"
 import { useEffect, useState } from "react"
-import { Game } from "../interfaces/Game"
+import { GAME_STATUS, Game } from "../interfaces/Game"
 import { Result } from "./Result"
 
 export const PLAYER2 = 'IA'
@@ -65,22 +65,31 @@ export const Board = () => {
     };
 
     return (
-        <section className='game'>
+        <>
+            <div className='game'>
+                {
+                    boardLocal.map((_, index) => (
+                        <Square
+                            key={index}
+                            index={index}
+                            updateBoard={updateLocalBoardWithPlayerMove}
+                            disabled={statusLocal === 'FINISHED' || boardLocal[index] !== ''}
+                        >
+                            {boardLocal[index]}
+                        </Square>
+                    ))
+                }
+            </div >
             {
-                boardLocal.map((_, index) => (
-                    <Square
-                        key={index}
-                        index={index}
-                        updateBoard={updateLocalBoardWithPlayerMove}
-                        disabled={statusLocal === 'FINISHED' || boardLocal[index] !== ''}
-                    >
-                        {boardLocal[index]}
-                    </Square>
-                ))
-            }{
                 statusLocal === 'FINISHED' && <Result text={determineResult()} />
             }
-        </section>
+            {
+                statusLocal === GAME_STATUS.FINISHED
+                    ? <h3>Juego terminado</h3>
+                    : <h3>Partida en curso</h3>
+            }
+        </>
+
     )
 }
 

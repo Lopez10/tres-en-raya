@@ -8,6 +8,6 @@ export interface Game {
 }
 
 export const GAME_STATUS = {
-    IN_PROGRESS: 'En curso',
-    FINISHED: 'Finalizado',
+    IN_PROGRESS: 'IN_PROGRESS',
+    FINISHED: 'FINISHED',
 }
