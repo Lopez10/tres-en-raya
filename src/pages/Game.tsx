@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
-import { Board } from "../components/Board"
+import { Board, PLAYER2 } from "../components/Board"
 import { RootState } from "../store/store"
 import { setGame } from "../store/features/gameSlice"
 import { useEffect } from "react"
@@ -36,7 +36,7 @@ export const Game = () => {
                 paddingBottom: '20px',
                 textAlign: 'center'
             }}>
-                {player.username} vs IA
+                {player.username} vs {PLAYER2}
             </h2>
             <Board />
         </div>
