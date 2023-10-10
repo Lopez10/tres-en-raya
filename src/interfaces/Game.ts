@@ -6,3 +6,8 @@ export interface Game {
     playerId: string;
     winner: string;
 }
+
+export const GAME_STATUS = {
+    IN_PROGRESS: 'En curso',
+    FINISHED: 'Finalizado',
+}
