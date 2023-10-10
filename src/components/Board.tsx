@@ -6,6 +6,8 @@ import { useEffect, useState } from "react"
 import { Game } from "../interfaces/Game"
 import { Result } from "./Result"
 
+export const PLAYER2 = 'IA'
+
 export const Board = () => {
     const { id, board, turn, status, playerId, winner } = useSelector((state: RootState) => state.game)
 
@@ -52,14 +54,10 @@ export const Board = () => {
     }
 
     const determineResult = () => {
-        const resultMappings = {
-            [playerId]: 'Ganaste',
-            'IA': 'Perdiste',
-            null: 'Empate'
-        };
-
-        return resultMappings[winnerLocal];
-    }
+        if (winnerLocal === playerId) return 'Ganaste';
+        if (winnerLocal === PLAYER2) return 'Perdiste';
+        return 'Empate';
+    };
 
     return (
         <section className='game'>
